@@ -1,38 +1,59 @@
-.App {
-  text-align: center;
+#main{
+  width:100%;
+  margin:0px;
+  padding: 0px;
+  background-color: #1f1f1f;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+[class*="col-"] {
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@media only screen and (min-width: 800px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-13{width: 12%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-14{width: 37%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@media only screen and (min-width: 1280px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-13{width: 12%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-14{width: 37%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
 }
 
-.App-link {
-  color: #61dafb;
+.center {
+    text-align: center;
+    margin : 0 auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#logo {
+  max-width:200px;
+    height:auto;
 }
