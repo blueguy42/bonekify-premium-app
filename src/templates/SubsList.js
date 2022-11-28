@@ -34,6 +34,7 @@ export default function SubsList(props) {
             <Grid item xs={2}>
             <Button color="error"
                   type="submit"
+                  onClick = {() => props.handleClick(props.indeks)}
                   variant="contained"
                 >
                   Reject
@@ -51,6 +52,7 @@ export default function SubsList(props) {
             <Grid item xs={2}>
             <Button color="success"
                   type="submit"
+                  onClick = {() => props.handleClick(props.indeks)}
                   variant="contained"
                 >
                   Accept

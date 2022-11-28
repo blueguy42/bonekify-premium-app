@@ -36,6 +36,14 @@ class Admin extends Component{
       this.state = {
         subs : ['saul sub audrey', 'afan sub liza', 'kiky sub ulfa']
       }
+      this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick = (indeks) => {
+        this.state.subs.splice(indeks,1)
+        this.setState({
+          subs: this.state.subs
+        });
     }
 
     render() {
@@ -56,7 +64,7 @@ class Admin extends Component{
                 Subscriptions Requests! 
               </Typography>
                 {
-                  this.state.subs.map((item,index) => <SubsList nama= {item} key = {index}></SubsList>)
+                  this.state.subs.map((item,index) => <SubsList handleClick={this.handleClick} subs= {this.state.subs} nama= {item} indeks = {index} key = {index}></SubsList>)
                 }
                 <Pagination count={5} color="primary" sx = {{marginTop: '50px'}} />
             </Box>
