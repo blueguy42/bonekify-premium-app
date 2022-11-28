@@ -58,7 +58,7 @@ class Admin extends Component{
                 {
                   this.state.subs.map((item,index) => <SubsList nama= {item} key = {index}></SubsList>)
                 }
-                <Pagination count={10} color="primary" sx = {{marginTop: '50px'}} />
+                <Pagination count={5} color="primary" sx = {{marginTop: '50px'}} />
             </Box>
         </Container>
         </ThemeProvider>

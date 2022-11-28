@@ -40,9 +40,9 @@ export default function SubsList(props) {
             </Button >
             </Grid>
             <Grid item xs={8}>
-                <Card sx = {{borderRadius: 5}}>
-                    <CardContent sx = {{ backgroundColor: '#9090DF'}}>
-                        <Typography sx={{ fontSize: 25 }}>
+                <Card sx = {{borderRadius: 2}}>
+                    <CardContent sx = {{ backgroundColor: '#323232', border: '3px solid white'}}>
+                        <Typography sx={{ fontSize: 25, color: 'white'}}>
                         {props.nama}
                         </Typography>
                     </CardContent>
