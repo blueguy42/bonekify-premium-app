@@ -29,7 +29,7 @@ export default function Navbar() {
 
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
-    let path = `login`; 
+    let path = `/login`; 
     navigate(path);
   }
 

@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import Navbar from "./templates/SubsList";
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Paper from  '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import SubsList from './templates/SubsList';
@@ -49,9 +44,9 @@ class Admin extends Component{
         console.log(this.state.subs)
     }
 
-    handlePagination = (event) => {
+    handlePagination = (event,p) => {
       this.setState({
-        page: event.target.textContent
+        page: p
       });
     }
 
@@ -76,7 +71,7 @@ class Admin extends Component{
                 {
                   slicedArray.map((item,index) => <SubsList handleClick={this.handleClick} subs= {this.state.subs} nama= {item} indeks = {index + (this.state.page-1)*2} key = {index}></SubsList>)
                 }
-                <Pagination onClick = {(event) => this.handlePagination(event)} count={Math.ceil(this.state.subs.length/2)} color="primary" sx = {{marginTop: '50px'}} />
+                <Pagination onChange = {this.handlePagination} count={Math.ceil(this.state.subs.length/2)} color="primary" sx = {{marginTop: '50px'}} />
             </Box>
         </Container>
         </ThemeProvider>
