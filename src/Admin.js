@@ -34,9 +34,11 @@ class Admin extends Component{
     constructor(props){
       super(props)
       this.state = {
-        subs : ['saul sub audrey', 'afan sub liza', 'kiky sub ulfa']
+        subs : ['saul sub audrey', 'afan sub liza', 'kiky sub ulfa'],
+        page : 1
       }
       this.handleClick = this.handleClick.bind(this);
+      this.handlePagination = this.handlePagination.bind(this);
     }
 
     handleClick = (indeks) => {
@@ -44,9 +46,17 @@ class Admin extends Component{
         this.setState({
           subs: this.state.subs
         });
+        console.log(this.state.subs)
+    }
+
+    handlePagination = (event) => {
+      this.setState({
+        page: event.target.textContent
+      });
     }
 
     render() {
+      let slicedArray = this.state.subs.slice((this.state.page-1)*2, (this.state.page-1)*2 + 2)
       return (
         <ThemeProvider theme={theme}>
         <Container maxWidth={false}>
@@ -64,9 +74,9 @@ class Admin extends Component{
                 Subscriptions Requests! 
               </Typography>
                 {
-                  this.state.subs.map((item,index) => <SubsList handleClick={this.handleClick} subs= {this.state.subs} nama= {item} indeks = {index} key = {index}></SubsList>)
+                  slicedArray.map((item,index) => <SubsList handleClick={this.handleClick} subs= {this.state.subs} nama= {item} indeks = {index + (this.state.page-1)*2} key = {index}></SubsList>)
                 }
-                <Pagination count={5} color="primary" sx = {{marginTop: '50px'}} />
+                <Pagination onClick = {(event) => this.handlePagination(event)} count={Math.ceil(this.state.subs.length/2)} color="primary" sx = {{marginTop: '50px'}} />
             </Box>
         </Container>
         </ThemeProvider>
