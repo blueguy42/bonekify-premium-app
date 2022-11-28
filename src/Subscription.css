@@ -1,0 +1,30 @@
+#list-lagu{
+  margin: 0 auto;
+  padding-bottom: 5vw;
+  border-collapse: collapse;
+}
+
+#list-lagu tr th {
+    color: #b3b3b3;
+    font-size: 12px;
+    font-weight:100;
+    letter-spacing: 1px;
+    padding-top:20px;
+    padding-bottom:20px;
+    text-align:left;
+    border-bottom: 1px solid #b3b3b3;
+    line-height: 1em;
+}
+
+
+#list-lagu tr td {
+    color : #b3b3b3;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+
+.list-lagu-item:hover {
+  transition: 0.3s;
+  background-color: #414141;
+}

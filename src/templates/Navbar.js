@@ -5,7 +5,7 @@ function Navbar(){
     <div>
       <div id="sidebar" class = "col-s-1 col-13">
         <img id="headerlogo" src="/img/Bonekify.png" />
-        <a href="#">Daftar Album</a>
+        <a href="/subscription">Daftar Permintaan Subscription</a>
       </div>
       <div id="side">
         <div class="topnav">
@@ -13,7 +13,7 @@ function Navbar(){
             <button class="dropbtn">
               NOT LOGGED IN
             </button>
-            <a href="#">Log in</a>
+            <a href="/login">Log in</a>
           </div>
         </div>      
       </div>
