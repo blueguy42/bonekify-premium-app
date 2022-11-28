@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -29,7 +28,6 @@ const theme = createTheme({
 
 class Register extends Component{
     render() {
-      const { classes } = this.props;
 
       const handleSubmit = (event) => {
         event.preventDefault();
@@ -106,9 +104,5 @@ class Register extends Component{
       )
     }
   }
-
-Register.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
   
 export default Register;

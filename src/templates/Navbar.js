@@ -1,24 +1,59 @@
-import "./Navbar.css"
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
 
-function Navbar(){
+const theme = createTheme({
+  palette: {
+
+    primary: {
+      main: '#FFFFFF',
+
+    },
+    secondary: {
+      main: '#FFFFFF',
+      contrastText: '#FFFFFF',
+    },
+    background: {
+      default: "#FFFFFF"
+    },
+    mode: 'dark',
+  },
+});
+
+export default function Navbar() {
+
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `login`; 
+    navigate(path);
+  }
+
   return (
-    <div>
-      <div id="sidebar" class = "col-s-1 col-13">
-        <img id="headerlogo" src="/img/Bonekify.png" />
-        <a href="/subscription">Daftar Permintaan Subscription</a>
-      </div>
-      <div id="side">
-        <div class="topnav">
-          <div class="dropdown">
-            <button class="dropbtn">
-              NOT LOGGED IN
-            </button>
-            <a href="/login">Log in</a>
-          </div>
-        </div>      
-      </div>
-    </div>
-  )
+    <ThemeProvider theme={theme}>   
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" sx={{background : '#272727'}} >
+          <Toolbar>
+          <Box
+          component="img"
+          sx={{
+            height: 50,
+            width: 50,
+            maxHeight: { xs: 233, md: 167 },
+            maxWidth: { xs: 350, md: 250 },
+          }}
+          alt="Logo Bonekify"
+          src="/img/Bonekify.png"/>
+          {/* TIPOGRAFINYA DUMMY CUMAN BANTU BIAR MOJOKKIN LOG OUT KE KANAN */}
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
+            <Button style={{backgroundColor: "rgba(150,0,0,0.5)", color: 'white'}} onClick={routeChange} color="error">Log out</Button>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    </ThemeProvider>
+  );
 }
-
-export default Navbar
