@@ -1,44 +1,114 @@
-import "./Register.css"
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Link from '@mui/material/Link';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Paper from  '@mui/material/Paper';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function Register(){
-  return (
-    <div class ="col-14 col-s-4 center">
-      <div id  = "register-page">
-        <a href="/" ><img src = "/img/Bonekify.png" id ="logo"/></a>
-        <h1>Sign up for free to start<br/>listening.</h1><br/>
-      </div> 
-      <div>
-      <form id = "register-form" method="post" onsubmit="return ValidateForm()" action="/register/submit">
-        <div id ="div-email">
-          <label for="fname">Apa email kamu?</label>
-          <input type="text" id="email" name="email" onkeyup="emailChange()" placeholder="Masukkan email kamu.."/>
-        </div> 
+const theme = createTheme({
+  palette: {
 
-        <div id ="div-sandi">
-          <label for="lname">Buat kata sandi</label>
-          <input type="password" autocomplete="off" id="sandi" name="sandi" onkeyup="sandiWarning()" placeholder="Masukkan kata sandi.."/>
-        </div> 
-    
-        <div id ="div-ksandi">
-          <label for="lname">Konfirmasi sandi kamu</label>
-          <input type="password" autocomplete="off" id="ksandi" name="ksandi" onkeyup="ksandiWarning()" placeholder="Masukkan lagi sandi kamu.."/>
-        </div> 
-    
-        <div id ="div-nama">
-          <label for="lname">Siapa namamu?</label>
-          <input type="text" id="nama" name="nama" onkeyup="namaWarning()" placeholder="Masukkan nama profil.."/>
-        </div>
-      
-        <input type="submit" value="Submit" />
-        <div id ="submitWarning"></div>
-      </form>
-      <br/>
-      <p class="TOA">By clicking on sign-up, you agree to Bonekify's Terms and Conditions of Use.<br/><br/>
-    To learn more about how Bonekify collects, uses, shares and protects your personal data, please see Bonekify's Privacy Policy.</p>
-      <p> <strong>Punya akun?</strong> <a id = "gantiwarna" href="login">Masuk.</a></p>
-    </div>
-  </div>
-  )
-}
+    primary: {
+      main: '#BC9928',
 
-export default Register
+    },
+    secondary: {
+      main: '#0000ff',
+      contrastText: '#00ff00',
+    },
+    background: {
+      default: "#242424"
+    },
+    mode: 'dark',
+  },
+});
+
+class Register extends Component{
+    render() {
+      const { classes } = this.props;
+
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        console.log({
+          email: data.get('email'),
+          password: data.get('password'),
+        });
+      };
+
+      return (
+        <ThemeProvider theme={theme}>
+          <Paper vairant = "outlined" elevation = {8}  sx={{width: '50%', margin: '10px auto', padding: '50px', marginTop: '80px',}}>
+            <CssBaseline />
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <Typography component="h1" variant="h4" sx={{marginBottom: '20px', fontWeight: '700', textShadow: '1px 1px 9px gold',}}>
+                Sign up
+              </Typography>
+              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoFocus
+                />
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  name="name"
+                  label="Your name"
+                  id="name"
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="confirm-password"
+                  label="Confirm Password"
+                  type="password"
+                  id="confirm-password"
+                />
+                <Button color="success"
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Sign Up
+                </Button >
+                <Link href="/login" >
+                  {"Already have an account? Sign In"}
+                </Link>
+              </Box>
+            </Box>
+          </Paper>
+        </ThemeProvider>
+      )
+    }
+  }
+
+Register.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+  
+export default Register;
