@@ -24,7 +24,7 @@ const theme = createTheme({
   },
 });
 
-export default function SubsList(props) {
+export default function Lagu(props) {
 
   return (
     <ThemeProvider theme={theme}>   
@@ -35,7 +35,7 @@ export default function SubsList(props) {
                   onClick = {() => props.handleClick(props.indeks)}
                   variant="contained"
                 >
-                  Reject
+                  Delete
             </Button >
             </Grid>
             <Grid item xs={8}>
@@ -53,7 +53,7 @@ export default function SubsList(props) {
                   onClick = {() => props.handleClick(props.indeks)}
                   variant="contained"
                 >
-                  Accept
+                  Edit
             </Button >
             </Grid>
         </Grid>

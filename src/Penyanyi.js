@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
-import Typography from '@mui/material/Typography';
 import Tab from '@mui/material/Tab';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TambahLagu from './templates/TambahLagu';
+import DaftarLagu from './templates/DaftarLagu';
 
 const theme = createTheme({
   palette: {
@@ -30,7 +29,7 @@ class Penyanyi extends Component{
     constructor(props){
       super(props)
       this.state = {
-        tab : 0 // 1 untuk case liat lagu, 2 untuk case tambah lagu
+        tab : 0, // 1 untuk case liat lagu, 2 untuk case tambah lagu
       }
       this.handleTab = this.handleTab.bind(this);
     }
@@ -67,7 +66,7 @@ class Penyanyi extends Component{
         )}
         {this.state.tab === 1 && (
           <Box>
-            <Typography>The second tab</Typography>
+            <DaftarLagu />
           </Box>
         )}
             </Box>
