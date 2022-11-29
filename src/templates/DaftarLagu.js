@@ -29,19 +29,27 @@ class DaftarLagu extends Component{
     constructor(props){
       super(props)
       this.state = {
-        songs : ['3000 tahun lagi', 'Pupus', 'Risalah Hati'],
+        songs : ['3000 tahun lagi', 'Pupus', 'Risalah Hati', 'Asalkan kau bahagia'],
         page : 1
       }
-      this.handleClick = this.handleClick.bind(this);
+      this.handleDelete = this.handleDelete.bind(this);
       this.handlePagination = this.handlePagination.bind(this);
+      this.handleEdit = this.handleEdit.bind(this)
     }
 
-    handleClick = (indeks) => {
+    handleDelete = (indeks) => {
         this.state.songs.splice(indeks,1)
         this.setState({
-          subs: this.state.songs
+          songs: this.state.songs
         });
-        console.log(this.state.songs)
+    }
+
+    handleEdit = (indeks, nama) => {
+        let newArray = this.state.songs
+        newArray[indeks] = nama
+        this.setState({
+            songs: newArray
+          });
     }
 
     handlePagination = (event,p) => {
@@ -51,7 +59,8 @@ class DaftarLagu extends Component{
     }
 
     render() {
-      let slicedArray = this.state.songs.slice((this.state.page-1)*2, (this.state.page-1)*2 + 2)
+      let rowsPerPagination = 3
+      let slicedArray = this.state.songs.slice((this.state.page-1)*rowsPerPagination, (this.state.page-1)*rowsPerPagination + rowsPerPagination)
       return (
         <ThemeProvider theme={theme}>
         <Container maxWidth={false}>
@@ -65,13 +74,13 @@ class DaftarLagu extends Component{
                 margin: '0 auto'
               }}
             >
-              <Typography component="h1" variant="h4" sx={{marginTop: '60px', marginBottom: '70px', fontWeight: '700', textShadow: '1px 1px 9px black',}}>
+              <Typography component="h1" variant="h4" sx={{marginTop: '20px', marginBottom: '10px', fontWeight: '700', textShadow: '1px 1px 9px black',}}>
                 See and Edit Songs Here! 
               </Typography>
                 {
-                  slicedArray.map((item,index) => <Lagu handleClick={this.handleClick} subs= {this.state.songs} nama= {item} indeks = {index + (this.state.page-1)*2} key = {index}></Lagu>)
+                  slicedArray.map((item,index) => <Lagu handleDelete={this.handleDelete} handleEdit={this.handleEdit} songs= {this.state.songs} nama= {item} indeks = {index + (this.state.page-1)*rowsPerPagination} key = {index}></Lagu>)
                 }
-                <Pagination onChange = {this.handlePagination} count={Math.ceil(this.state.songs.length/2)} color="primary" sx = {{marginTop: '50px'}} />
+                <Pagination onChange = {this.handlePagination} count={Math.ceil(this.state.songs.length/rowsPerPagination)} color="primary" sx = {{marginTop: '50px', marginBottom:'20px'}} />
             </Box>
         </Container>
         </ThemeProvider>

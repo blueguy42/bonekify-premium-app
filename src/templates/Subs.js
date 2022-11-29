@@ -28,7 +28,7 @@ export default function Subs(props) {
 
   return (
     <ThemeProvider theme={theme}>   
-        <Grid container spacing={2} sx = {{marginBottom:'50px', textAlign: 'center', alignItems: 'center',}}>
+        <Grid container spacing={2} sx = {{borderRadius: 3 , marginTop:'50px', paddingBottom:'15px', textAlign: 'center', alignItems: 'center', background: 'linear-gradient(30deg, rgba(60,99,96,1) 35%, rgba(61,103,72,1) 100%)'}}>
             <Grid item xs={2}>
             <Button color="error"
                   type="submit"
@@ -39,9 +39,9 @@ export default function Subs(props) {
             </Button >
             </Grid>
             <Grid item xs={8}>
-                <Card sx = {{borderRadius: 2}}>
-                    <CardContent sx = {{ backgroundColor: '#323232', border: '3px solid white'}}>
-                        <Typography sx={{ fontSize: 25, color: 'white'}}>
+            <Card sx = {{borderRadius: 3, backgroundColor: 'transparent', boxShadow: 0}}>
+                    <CardContent>
+                        <Typography sx={{ fontSize: 25, color: 'black'}}>
                         {props.nama}
                         </Typography>
                     </CardContent>

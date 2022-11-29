@@ -29,7 +29,7 @@ class Admin extends Component{
     constructor(props){
       super(props)
       this.state = {
-        subs : ['saul sub audrey', 'afan sub liza', 'kiky sub ulfa'],
+        subs : ['saul sub audrey', 'afan sub liza', 'kiky sub ulfa', 'haka sub leoni', 'kristo sub grey'],
         page : 1
       }
       this.handleClick = this.handleClick.bind(this);
@@ -41,7 +41,6 @@ class Admin extends Component{
         this.setState({
           subs: this.state.subs
         });
-        console.log(this.state.subs)
     }
 
     handlePagination = (event,p) => {
@@ -51,7 +50,8 @@ class Admin extends Component{
     }
 
     render() {
-      let slicedArray = this.state.subs.slice((this.state.page-1)*2, (this.state.page-1)*2 + 2)
+      let rowsPerPagination = 3
+      let slicedArray = this.state.subs.slice((this.state.page-1)*rowsPerPagination, (this.state.page-1)*rowsPerPagination + rowsPerPagination)
       return (
         <ThemeProvider theme={theme}>
         <Container maxWidth={false}>
@@ -65,13 +65,13 @@ class Admin extends Component{
                 margin: '0 auto'
               }}
             >
-              <Typography component="h1" variant="h4" sx={{marginTop: '60px', marginBottom: '70px', fontWeight: '700', textShadow: '1px 1px 9px black',}}>
+              <Typography component="h1" variant="h4" sx={{marginTop: '60px', fontWeight: '700', textShadow: '1px 1px 9px black',}}>
                 Subscriptions Requests! 
               </Typography>
                 {
-                  slicedArray.map((item,index) => <Subs handleClick={this.handleClick} subs= {this.state.subs} nama= {item} indeks = {index + (this.state.page-1)*2} key = {index}></Subs>)
+                  slicedArray.map((item,index) => <Subs handleClick={this.handleClick} nama= {item} indeks = {index + (this.state.page-1)*rowsPerPagination} key = {index}></Subs>)
                 }
-                <Pagination onChange = {this.handlePagination} count={Math.ceil(this.state.subs.length/2)} color="primary" sx = {{marginTop: '50px'}} />
+                <Pagination onChange = {this.handlePagination} count={Math.ceil(this.state.subs.length/rowsPerPagination)} color="primary" sx = {{marginTop: '50px', marginBottom:'20px'}} />
             </Box>
         </Container>
         </ThemeProvider>
