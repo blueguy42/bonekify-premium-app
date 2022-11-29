@@ -40,7 +40,7 @@ class Register extends Component{
 
       return (
         <ThemeProvider theme={theme}>
-          <Paper vairant = "outlined" elevation = {8}  sx={{width: '50%', margin: '10px auto', padding: '50px', marginTop: '80px',}}>
+          <Paper vairant = "outlined" elevation = {8}  sx={{width: '50%', margin: '10px auto', padding: '50px', marginTop: '50px',}}>
             <CssBaseline />
             <Box
               sx={{

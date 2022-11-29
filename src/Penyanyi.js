@@ -29,7 +29,7 @@ class Penyanyi extends Component{
     constructor(props){
       super(props)
       this.state = {
-        tab : 0, // 1 untuk case liat lagu, 2 untuk case tambah lagu
+        tab : 1, // 1 untuk case liat lagu, 0 untuk case tambah lagu
       }
       this.handleTab = this.handleTab.bind(this);
     }
