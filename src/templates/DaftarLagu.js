@@ -6,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Lagu from './Lagu';
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 const theme = createTheme({
   palette: {
@@ -29,19 +32,60 @@ class DaftarLagu extends Component{
     constructor(props){
       super(props)
       this.state = {
-        songs : ['3000 tahun lagi', 'Pupus', 'Risalah Hati', 'Asalkan kau bahagia'],
+        songs : [],
         page : 1
       }
       this.handleDelete = this.handleDelete.bind(this);
       this.handlePagination = this.handlePagination.bind(this);
       this.handleEdit = this.handleEdit.bind(this)
+      this.getSongs = this.getSongs.bind(this)
     }
 
+    componentDidMount(){
+      this.getSongs()
+    }
+
+    getSongs = () => {
+      let dataToSend = JSON.stringify({"token": cookies.get('token'), "user_id": cookies.get('user_id') });
+      fetch('http://localhost:1400/lagu/auth/read/penyanyi', {
+            method: 'POST',
+            mode: "cors",
+            body: dataToSend,        
+            headers: {
+              'Content-Type': 'application/json'
+          }
+          
+        }).then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          let temp = []
+          data.data.forEach((x, i) => {
+            temp.push([x.song_id, x.Judul])
+          })
+          this.setState({
+            songs : temp
+          });
+        })
+      }
+
     handleDelete = (indeks) => {
-        this.state.songs.splice(indeks,1)
-        this.setState({
-          songs: this.state.songs
-        });
+      let dataToSend = JSON.stringify({"token": cookies.get('token'), "song_id": indeks });
+      fetch('http://localhost:1400/lagu/auth/delete', {
+            method: 'DELETE',
+            mode: "cors",
+            body: dataToSend,        
+            headers: {
+              'Content-Type': 'application/json'
+          }
+          
+        }).then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data)
+          this.getSongs()
+        })
     }
 
     handleEdit = (indeks, nama) => {
@@ -78,7 +122,7 @@ class DaftarLagu extends Component{
                 See and Edit Songs Here! 
               </Typography>
                 {
-                  slicedArray.map((item,index) => <Lagu handleDelete={this.handleDelete} handleEdit={this.handleEdit} songs= {this.state.songs} nama= {item} indeks = {index + (this.state.page-1)*rowsPerPagination} key = {index}></Lagu>)
+                  slicedArray.map((item,index) => <Lagu handleDelete={this.handleDelete} handleEdit={this.handleEdit} songs= {this.state.songs} nama= {item[1]} indeks = {item[0]} key = {index}></Lagu>)
                 }
                 <Pagination onChange = {this.handlePagination} count={Math.ceil(this.state.songs.length/rowsPerPagination)} color="primary" sx = {{marginTop: '50px', marginBottom:'20px'}} />
             </Box>
