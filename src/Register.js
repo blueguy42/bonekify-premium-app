@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Button from '@mui/material/Button';
+import Cookies from "universal-cookie";
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Paper from  '@mui/material/Paper';
+import Alert from '@mui/material/Alert';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const cookies = new Cookies();
 
 const theme = createTheme({
   palette: {
@@ -27,15 +31,114 @@ const theme = createTheme({
 });
 
 class Register extends Component{
-    render() {
+  constructor(props){
+    super(props)
+    this.state = {
+      errorMsg: '',
+      emailMsg: '',
+      userMsg: '',
+      pass: '',
+      cPass: '',
+      status: false
+    }
+    this.handleEmail = this.handleEmail.bind(this);
+    this.handleUser = this.handleUser.bind(this);
+    this.handlePass = this.handlePass.bind(this);
+    this.handleCPass = this.handleCPass.bind(this);
+  }
 
+  handleEmail = (event) => {
+    const regex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+    let email = event.target.value
+    let msg = ''
+    if (!regex.test(email)){
+      msg = "Format email tidak sesuai! "
+    }
+    this.setState({
+      emailMsg : msg
+    });
+}
+
+handleUser = (event) => {
+  const regex = new RegExp(/^[a-zA-Z0-9_]*$/);
+  let user = event.target.value
+  let msg = ''
+  if (!regex.test(user)){
+    msg = "Format username tidak sesuai! (Alphanumerics only) "
+  }
+  this.setState({
+    userMsg : msg
+  });
+}
+
+handlePass = (event) => {
+  this.setState({
+    pass : event.target.value
+  });
+}
+
+handleCPass = (event) => {
+  let cpass = event.target.value
+  let msg = ''
+  if (cpass !== this.state.pass){
+    msg = "Confirm password tidak sama!"
+  }
+  this.setState({
+    cPass : msg
+  });
+}
+
+    render() {
       const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-          email: data.get('email'),
-          password: data.get('password'),
-        });
+        let name = data.get('name')
+        let email = data.get('email')
+        let username= data.get('username')
+        let password= data.get('password')
+        let cpassword = data.get('confirm-password')
+
+        if ((username.length === 0) || (password.length === 0) || (name.length === 0) || (email.length === 0) || (cpassword.length === 0)){
+          this.setState({
+            errorMsg : 'Salah satu field masih kosong!'
+          });
+        }else {
+          if ((this.state.emailMsg !== '') || (this.state.userMsg !== '') || (this.state.cPass !== '')){
+            this.setState({
+              errorMsg : 'Masih terdapat satu field yang tidak sesuai!'
+            });
+          }         else {
+            let dataToSend = JSON.stringify({"username": username, "password": password, "email": email, "name": name});
+            fetch('http://localhost:1400/user/register', {
+              method: 'POST',
+              mode: "cors",
+              body: dataToSend,        
+              headers: {
+                'Content-Type': 'application/json'
+            }
+            
+          }).then((response) => {
+            this.setState({
+              status : response.ok
+            });
+            return response.json();
+          })
+          .then((data) => {
+            if (!this.state.status){
+              this.setState({
+                errorMsg: data.message
+              });
+            } else {
+              console.log(data)
+              cookies.set('isAdmin', '0', {path: '/', expires: new Date(Date.now()+3600*24)});
+              cookies.set('token', data.token, {path: '/', expires: new Date(Date.now()+3600*24)});
+              cookies.set('user_id', data.user_id, {path: '/', expires: new Date(Date.now()+3600*24)});
+              
+              window.location.href = "/penyanyi"
+            }
+          })
+        }
+        }
       };
 
       return (
@@ -52,15 +155,7 @@ class Register extends Component{
               <Typography component="h1" variant="h4" sx={{marginBottom: '20px', fontWeight: '700', textShadow: '1px 1px 9px gold',}}>
                 Sign up
               </Typography>
-              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoFocus
-                />
+              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 , width: '100%' }}>
                 <TextField
                   margin="normal"
                   fullWidth
@@ -70,8 +165,33 @@ class Register extends Component{
                 />
                 <TextField
                   margin="normal"
+                  fullWidth
+                  onChange = {this.handleUser}
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoFocus
+                />
+                { this.state.userMsg.length >0  &&
+                  <div><Alert sx = {{width: '100%', textAlign: 'center'}} severity="error">{this.state.userMsg}</Alert></div>
+                }
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  onChange = {this.handleEmail}
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoFocus
+                />
+                { this.state.emailMsg.length >0  &&
+                  <div><Alert sx = {{width: '100%', textAlign: 'center'}} severity="error">{this.state.emailMsg}</Alert></div>
+                }
+                <TextField
+                  margin="normal"
                   required
                   fullWidth
+                  onChange = {this.handlePass}
                   name="password"
                   label="Password"
                   type="password"
@@ -81,11 +201,15 @@ class Register extends Component{
                   margin="normal"
                   required
                   fullWidth
+                  onChange = {this.handleCPass}
                   name="confirm-password"
                   label="Confirm Password"
                   type="password"
                   id="confirm-password"
                 />
+                { this.state.cPass.length >0  &&
+                  <div><Alert sx = {{width: '100%', textAlign: 'center'}} severity="error">{this.state.cPass}</Alert></div>
+                }
                 <Button color="success"
                   type="submit"
                   fullWidth
@@ -93,8 +217,11 @@ class Register extends Component{
                   sx={{ mt: 3, mb: 2 }}
                 >
                   Sign Up
-                </Button >
-                <Link href="/login" >
+                </Button >                
+                { this.state.errorMsg.length >0  &&
+                  <div><Alert sx = {{width: '100%', textAlign: 'center'}} severity="error">{this.state.errorMsg}</Alert><br /></div>
+                }
+                <Link href="/" >
                   {"Already have an account? Sign In"}
                 </Link>
               </Box>
