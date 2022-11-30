@@ -1,11 +1,14 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Cookies from "universal-cookie";
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
+
+const cookies = new Cookies();
 
 const theme = createTheme({
   palette: {
@@ -29,8 +32,10 @@ export default function Navbar() {
 
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
-    let path = `/login`; 
-    navigate(path);
+    cookies.set('isAdmin', "", {path: '/', expires: new Date(Date.now()-1)});
+    cookies.set('token', "", {path: '/', expires: new Date(Date.now()-1)});
+    cookies.set('user_id', "", {path: '/', expires: new Date(Date.now()-1)});
+    window.location.href = "/"
   }
 
   return (
