@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Cookies from "universal-cookie";
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -6,7 +7,11 @@ import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Paper from  '@mui/material/Paper';
+import { useNavigate } from "react-router-dom";
+import Alert from '@mui/material/Alert';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const cookies = new Cookies();
 
 const theme = createTheme({
   palette: {
@@ -27,14 +32,64 @@ const theme = createTheme({
 });
 
 class Login extends Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      errorMsg: '',
+      status: false
+    }
+  }
+
     render() {
-      const handleSubmit = (event) => {
+
+      const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-          email: data.get('email'),
-          password: data.get('password'),
-        });
+        let username= data.get('username')
+        let password= data.get('password')
+
+        if ((username.length === 0) || (password.length === 0)){
+          this.setState({
+            errorMsg : 'username atau password tidak boleh kosong!'
+          });
+        }
+        else {
+          let dataToSend = JSON.stringify({"username": username, "password": password });
+          fetch('http://localhost:1400/user/login', {
+            method: 'POST',
+            mode: "cors",
+            body: dataToSend,        
+            headers: {
+              'Content-Type': 'application/json'
+          }
+          
+        }).then((response) => {
+          this.setState({
+            status : response.ok
+          });
+          return response.json();
+        })
+        .then((data) => {
+          if (!this.state.status){
+            this.setState({
+              errorMsg: data.message
+            });
+          } else {
+            console.log(data)
+            cookies.set('isAdmin', data.isAdmin, {path: '/', expires: new Date(Date.now()+3600*24)});
+            cookies.set('token', data.token, {path: '/', expires: new Date(Date.now()+3600*24)});
+            cookies.set('user_id', data.user_id, {path: '/', expires: new Date(Date.now()+3600*24)});
+            
+            if (data.isAdmin){
+             window.location.href = "/admin"
+            }
+            else{
+              window.location.href = "/penyanyi"
+            }
+          }
+        })
+      }
+
       };
 
       return (
@@ -51,13 +106,13 @@ class Login extends Component{
               <Typography component="h1" variant="h4" sx={{marginBottom: '20px', fontWeight: '700', textShadow: '1px 1px 9px gold',}}>
                 Sign in
               </Typography>
-              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '90%' }}>
                 <TextField
                   margin="normal"
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
+                  id="username"
+                  label="Username"
+                  name="username"
                   autoFocus
                   sx = {{color: 'red'}}
                 />
@@ -79,6 +134,9 @@ class Login extends Component{
                 >
                   Sign In
                 </Button >
+                { this.state.errorMsg.length >0  &&
+                  <div><Alert sx = {{width: '100%', textAlign: 'center'}} severity="error">{this.state.errorMsg}</Alert><br /></div>
+                }
                 <Link href="/register" >
                   {"Don't have an account? Sign Up"}
                 </Link>
