@@ -32,7 +32,7 @@ export default function Subs(props) {
             <Grid item xs={2}>
             <Button color="error"
                   type="submit"
-                  onClick = {() => props.handleClick(props.indeks)}
+                  onClick = {() => props.handleClick(0)}
                   variant="contained"
                 >
                   Reject
@@ -42,7 +42,7 @@ export default function Subs(props) {
             <Card sx = {{borderRadius: 3, backgroundColor: 'transparent', boxShadow: 0}}>
                     <CardContent>
                         <Typography sx={{ fontSize: 25, color: 'black'}}>
-                        {props.nama}
+                        Subs ID:{props.nama[0]} | Creator ID: {props.nama[1]}
                         </Typography>
                     </CardContent>
                 </Card>
@@ -50,7 +50,7 @@ export default function Subs(props) {
             <Grid item xs={2}>
             <Button color="success"
                   type="submit"
-                  onClick = {() => props.handleClick(props.indeks)}
+                  onClick = {() => props.handleClick(0)}
                   variant="contained"
                 >
                   Accept

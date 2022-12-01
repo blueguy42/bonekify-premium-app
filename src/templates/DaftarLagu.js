@@ -46,13 +46,12 @@ class DaftarLagu extends Component{
     }
 
     getSongs = () => {
-      let dataToSend = JSON.stringify({"token": cookies.get('token'), "user_id": cookies.get('user_id') });
       fetch('http://localhost:1400/lagu/auth/read/penyanyi', {
-            method: 'POST',
-            mode: "cors",
-            body: dataToSend,        
+            method: 'GET',
+            mode: "cors",       
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': cookies.get('token')
           }
           
         }).then((response) => {
@@ -70,13 +69,14 @@ class DaftarLagu extends Component{
       }
 
     handleDelete = (indeks) => {
-      let dataToSend = JSON.stringify({"token": cookies.get('token'), "song_id": indeks });
+      let dataToSend = JSON.stringify({"song_id": indeks });
       fetch('http://localhost:1400/lagu/auth/delete', {
             method: 'DELETE',
             mode: "cors",
             body: dataToSend,        
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': cookies.get('token')
           }
           
         }).then((response) => {
@@ -89,11 +89,23 @@ class DaftarLagu extends Component{
     }
 
     handleEdit = (indeks, nama) => {
-        let newArray = this.state.songs
-        newArray[indeks] = nama
-        this.setState({
-            songs: newArray
-          });
+      let dataToSend = JSON.stringify({"song_id": indeks, "judul": nama });
+      fetch('http://localhost:1400/lagu/auth/update/judul', {
+            method: 'PUT',
+            mode: "cors",
+            body: dataToSend,        
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': cookies.get('token')
+          }
+          
+        }).then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data)
+          this.getSongs()
+        })
     }
 
     handlePagination = (event,p) => {

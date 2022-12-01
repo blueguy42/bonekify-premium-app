@@ -24,10 +24,10 @@ function App() {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/penyanyi" element={loggedIn && !isAdmin ? <div><Navbar/> <Penyanyi/></div> : <Login />}/>
+          <Route path="/penyanyi" element={loggedIn && !isAdmin ? <div><Navbar/> <Penyanyi/></div> : <UnAuth />}/>
           <Route path="/" element={loggedIn ? <UnAuth /> : <Login/>}/>
           <Route path="/register" element={loggedIn ? <UnAuth /> : <Register/>}/>
-          <Route path="/admin" element={loggedIn && isAdmin ? <div><Navbar/><Admin/></div> : <Login />}/>
+          <Route path="/admin" element={loggedIn && isAdmin ? <div><Navbar/><Admin/></div> : <UnAuth />}/>
           <Route path="*" element={<UnAuth />}/>
         </Routes>
       </BrowserRouter>

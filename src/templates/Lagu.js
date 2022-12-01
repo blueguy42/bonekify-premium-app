@@ -74,7 +74,7 @@ export default function Lagu(props) {
                   onClick = {() => setOpen(true)}
                   variant="contained"
                 >
-                  Edit
+                  Edit Name
             </Button >
             </Grid>
             <Modal
@@ -85,7 +85,7 @@ export default function Lagu(props) {
       >
         <Box sx={style}>
         <Typography component="h1" variant="h4" sx={{textAlign: 'center', marginBottom: '20px', fontWeight: '700', textShadow: '1px 1px 1px black', color: 'black'}}>
-                Edit
+                New Name!
               </Typography>
               <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                 <TextField

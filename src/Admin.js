@@ -6,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Subs from './templates/Subs';
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 const theme = createTheme({
   palette: {
@@ -29,13 +32,41 @@ class Admin extends Component{
     constructor(props){
       super(props)
       this.state = {
-        subs : ['saul sub audrey', 'afan sub liza', 'kiky sub ulfa', 'haka sub leoni', 'kristo sub grey'],
+        subs : [],
         page : 1
       }
       this.handleClick = this.handleClick.bind(this);
       this.handlePagination = this.handlePagination.bind(this);
+      this.getSubs = this.getSubs.bind(this)
     }
 
+    componentDidMount(){
+      this.getSubs()
+    }
+
+    getSubs = () => {
+      fetch('http://localhost:1400/subscription/getpending', {
+            method: 'GET',
+            mode: "cors",       
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': cookies.get('token')
+          }
+          
+        }).then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          let temp = []
+          data.return.forEach((x, i) => {
+            temp.push([x.subscriber_id, x.creator_id])
+          })
+          this.setState({
+            subs: temp
+          });
+        })
+      }
+      
     handleClick = (indeks) => {
         this.state.subs.splice(indeks,1)
         this.setState({
@@ -69,7 +100,7 @@ class Admin extends Component{
                 Subscriptions Requests! 
               </Typography>
                 {
-                  slicedArray.map((item,index) => <Subs handleClick={this.handleClick} nama= {item} indeks = {index + (this.state.page-1)*rowsPerPagination} key = {index}></Subs>)
+                  slicedArray.map((item,index) => <Subs handleClick={this.handleClick} nama= {item} key = {index}></Subs>)
                 }
                 <Pagination onChange = {this.handlePagination} count={Math.ceil(this.state.subs.length/rowsPerPagination)} color="primary" sx = {{marginTop: '50px', marginBottom:'20px'}} />
             </Box>
