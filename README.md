@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# BONEKIFY PREMIUM APP - Tugas Besar 2 IF3110
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the repository for the front-end side of the Bonekify Premium App.
 
-## Available Scripts
+Bonekify Premium App is the extension of the original Bonekify App where users manage the premium songs available. Users can register as a singer for the premium songs. Singers can see, add, delete, and edit their songs. Users can also log in as an admin to manage the subscription requests of the plain Bonekify users to the premium singers.
 
-In the project directory, you can run:
+Bonekify Premium is built on React. Data is stored on a MySQL server from the back-end side.
 
-### `npm start`
+## Table of Contents
+- [BONEKIFY PREMIUM APP - Tugas Besar 2 IF3110](#bonekify-premium-app---tugas-besar-2-if3110)
+  - [Table of Contents](#table-of-contents)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Running the Server](#running-the-server)
+  - [Screenshots](#screenshots)
+  - [Tasks Allocation](#tasks-allocation)
+## Requirements
+As the server is running on a Docker container, make sure to first install Docker.
+You can choose to install Docker with <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> or a CLI.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+However, if you choose to run the server without Docker then you need to install NPM.
+You can download NPM through <a href="https://nodejs.org/en/download/.">this link.</a>.
+This project also requires Material UI, multer, axios, and universal-cookie library.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
+If you choose to use Docker, then you can first install then run Docker.
+To run the server, first build the container. Go to the Bonekify-Config Repository run:
+```
+docker compose up --build -d bonekify_premium_service
+```
+The command will build and run the container for the first time.
 
-### `npm test`
+However, if you choose to run using NPM then you can run 
+```
+npm install
+```
+For other dependant libraries, you need can install it by running this to the terminal
+```
+npm install @mui/material @emotion/react @emotion/styled universal-cookie multer axios
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Running the Server
+There are 2 ways to run this react app.
 
-### `npm run build`
+1. Docker
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+docker compose up
+```
+The web application will now be up and running. It is now locally accessible through port 1301.
+<b><a href="http://localhost:1300/public">http://localhost:1301</a></b>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Npm
+```
+npm start
+```
+The web application will now be up and running. It is now locally accessible through port 3000.
+<b><a href="http://localhost:1300/public">http://localhost:3000</a></b>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Screenshots
+![login.png](./public/img/screenshots/login.png)
+![register.png](./public/img/screenshots/register.png)
+![tambahlagu.png](./public/img/screenshots/home.png)
+![daftarlagu.png](./public/img/screenshots/search.png)
+![admin.png](./public/img/screenshots/admin.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Tasks Allocation
+This project is made by:
+- <a href="https://www.linkedin.com/in/ahmad-alfani-handoyo/"> Ahmad Alfani Handoyo (13520023)</a>
+- <a href="https://www.linkedin.com/in/saulsayers/?originalSubdomain=id">Saul Sayers (13520094)</a>
+- <a href="https://www.linkedin.com/in/rizky-ramadhana-putra-kusnaryanto-6037a51aa/">Rizky Ramadhana Putra Kusnaryanto (13520151)</a>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Halaman | Contributors 
+--- | --- 
+Routing | 13520094
+Login | 13520094 
+Register | 13520094 
+See Songs | 13520094
+Add Songs | 13520094
+Delete Songs | 13520094
+Edit Songs | 13520094
+See Subscription Requests | 13520094
+Accept Subscription Requests | 13520094, 13520023
+Reject Subscription Requests | 13520094, 13520023
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
