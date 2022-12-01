@@ -45,7 +45,7 @@ class Admin extends Component{
       this.getSubs()
     }
 
-    getSubs = () => {
+    getSubs = async () => {
       fetch('http://localhost:1400/subscription/pending', {
             method: 'GET',
             mode: "cors",       
@@ -65,7 +65,9 @@ class Admin extends Component{
           this.setState({
             subs: temp
           });
-        })
+        }).catch(err => {
+          console.log(err);
+      })
       }
       
       handleAccept = (creator_id, subscriber_id) => {
@@ -84,8 +86,19 @@ class Admin extends Component{
           })
           .then((data) => {
             console.log(data)
-            this.getSubs()
+          }).then(() => {
+            let temp = this.state.subs
+            let indeks = 0
+            temp.forEach((x, i) => {
+              if (x[0] === subscriber_id && x[1] === creator_id){
+                indeks = i
+              }})
+            temp.splice(indeks,1)
+            this.setState({
+              subs: temp
+            });
           })
+  
       }
   
       handleReject = (creator_id, subscriber_id) => {
@@ -103,8 +116,16 @@ class Admin extends Component{
             return response.json();
           })
           .then((data) => {
-            console.log(data)
-            this.getSubs()
+            let temp = this.state.subs
+            let indeks = 0
+            temp.forEach((x, i) => {
+              if (x[0] === subscriber_id && x[1] === creator_id){
+                indeks = i
+              }})
+            temp.splice(indeks,1)
+            this.setState({
+              subs: temp
+            });
           })
       }
 
