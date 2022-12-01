@@ -8,6 +8,8 @@ import Paper from  '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import Cookies from "universal-cookie";
+import Alert from '@mui/material/Alert';
+
 
 const cookies = new Cookies();
 
@@ -30,6 +32,13 @@ const theme = createTheme({
 });
 
 class TambahLagu extends Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      message: false
+    }
+  }
+
     render() {
 
     const handleSubmit = (event) => {
@@ -39,12 +48,21 @@ class TambahLagu extends Component{
         axios.post('http://localhost:1400/lagu/auth/create', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
-            'Authorization': cookies.get('token')
+            'Authorization': cookies.get('token_premium')
           } 
         })
         .then(res => {
             console.log(res);
             console.log(res.data);
+            this.setState({
+              message: true
+            });
+            setTimeout(() => {
+              this.setState({
+                message: false
+              });
+            }, 3000);
+            
         }).catch(err => {
             console.log(err);
         })
@@ -92,6 +110,9 @@ class TambahLagu extends Component{
                 >
                   Submit
                 </Button >
+                { this.state.message &&
+                  <div><Alert sx = {{width: '100%', textAlign: 'center'}} severity="success">Lagu baru berhasil ditambahkan!</Alert><br /></div>
+                }
               </Box>
             </Box>
           </Paper>

@@ -51,7 +51,7 @@ class Admin extends Component{
             mode: "cors",       
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': cookies.get('token')
+              'Authorization': cookies.get('token_premium')
           }
           
         }).then((response) => {
@@ -76,7 +76,7 @@ class Admin extends Component{
               body: dataToSend,        
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': cookies.get('token')
+                'Authorization': cookies.get('token_premium')
             }
             
           }).then((response) => {
@@ -95,7 +95,7 @@ class Admin extends Component{
               body: dataToSend,        
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': cookies.get('token')
+                'Authorization': cookies.get('token_premium')
             }
             
           }).then((response) => {

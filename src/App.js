@@ -14,9 +14,9 @@ function App() {
   let loggedIn = false
   let isAdmin = false
   
-  if (cookies.get('isAdmin') !== undefined){
+  if (cookies.get('isAdmin_premium') !== undefined){
     loggedIn = true
-    if (cookies.get('isAdmin') === '1'){
+    if (cookies.get('isAdmin_premium') === '1'){
       isAdmin = true
     } 
   }
@@ -25,7 +25,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/penyanyi" element={loggedIn && !isAdmin ? <div><Navbar/> <Penyanyi/></div> : <UnAuth />}/>
-          <Route path="/" element={loggedIn ? <UnAuth /> : <Login/>}/>
+          <Route path="/" element={!loggedIn ? <Login/> : (isAdmin ? <div><Navbar/><Admin/></div> : <div><Navbar/> <Penyanyi/></div>)}/>
           <Route path="/register" element={loggedIn ? <UnAuth /> : <Register/>}/>
           <Route path="/admin" element={loggedIn && isAdmin ? <div><Navbar/><Admin/></div> : <UnAuth />}/>
           <Route path="*" element={<UnAuth />}/>

@@ -53,7 +53,7 @@ class DaftarLagu extends Component{
             mode: "cors",       
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': cookies.get('token')
+              'Authorization': cookies.get('token_premium')
           }
           
         }).then((response) => {
@@ -61,7 +61,7 @@ class DaftarLagu extends Component{
         })
         .then((data) => {
           let temp = []
-          data.data.forEach((x, i) => {
+          data.forEach((x, i) => {
             temp.push([x.song_id, x.Judul])
           })
           this.setState({
@@ -78,7 +78,7 @@ class DaftarLagu extends Component{
             body: dataToSend,        
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': cookies.get('token')
+              'Authorization': cookies.get('token_premium')
           }
           
         }).then((response) => {
@@ -97,7 +97,7 @@ class DaftarLagu extends Component{
             body: dataToSend,        
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': cookies.get('token')
+              'Authorization': cookies.get('token_premium')
           }
           
         }).then((response) => {
@@ -112,7 +112,7 @@ class DaftarLagu extends Component{
       axios.put('http://localhost:1400/lagu/auth/update/audio_path', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': cookies.get('token')
+          'Authorization': cookies.get('token_premium')
         } 
       })
       .then(res => {

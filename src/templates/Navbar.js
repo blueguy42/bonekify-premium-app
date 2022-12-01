@@ -32,12 +32,13 @@ export default function Navbar() {
 
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
-    cookies.set('isAdmin', "", {path: '/', expires: new Date(Date.now()-1)});
-    cookies.set('token', "", {path: '/', expires: new Date(Date.now()-1)});
-    cookies.set('user_id', "", {path: '/', expires: new Date(Date.now()-1)});
+    cookies.set('isAdmin_premium', "", {path: '/', expires: new Date(Date.now()-1)});
+    cookies.set('name_premium', "", {path: '/', expires: new Date(Date.now()-1)});
+    cookies.set('token_premium', "", {path: '/', expires: new Date(Date.now()-1)});
+    cookies.set('user_id_premium', "", {path: '/', expires: new Date(Date.now()-1)});
     window.location.href = "/"
   }
-
+  let nama = cookies.get('name_premium')
   return (
     <ThemeProvider theme={theme}>   
       <Box sx={{ flexGrow: 1 }}>
@@ -54,7 +55,7 @@ export default function Navbar() {
           alt="Logo Bonekify"
           src="/img/Bonekify.png"/>
           {/* TIPOGRAFINYA DUMMY CUMAN BANTU BIAR MOJOKKIN LOG OUT KE KANAN */}
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
+            <Typography variant="h6" component="div" sx={{ marginLeft: 'auto', marginRight: '15px'}}>{nama}</Typography>
             <Button style={{backgroundColor: "rgba(150,0,0,0.5)", color: 'white'}} onClick={routeChange} color="error">Log out</Button>
           </Toolbar>
         </AppBar>

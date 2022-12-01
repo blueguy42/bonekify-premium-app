@@ -129,10 +129,10 @@ handleCPass = (event) => {
                 errorMsg: data.message
               });
             } else {
-              cookies.set('isAdmin', '0', {path: '/'});
-              cookies.set('token', data.token, {path: '/'});
-              cookies.set('user_id', data.user_id, {path: '/'});
-              cookies.set('name', data.name, {path: '/'});
+              cookies.set('isAdmin_premium', '0', {path: '/'});
+              cookies.set('token_premium', data.token, {path: '/'});
+              cookies.set('user_id_premium', data.user_id, {path: '/'});
+              cookies.set('name_premium', data.name, {path: '/'});
 
               
               window.location.href = "/penyanyi"

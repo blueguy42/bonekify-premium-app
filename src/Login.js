@@ -75,10 +75,10 @@ class Login extends Component{
               errorMsg: data.message
             });
           } else {
-            cookies.set('name', data.name, {path: '/'});
-            cookies.set('isAdmin', data.isAdmin, {path: '/'});
-            cookies.set('token', data.token, {path: '/'});
-            cookies.set('user_id', data.user_id, {path: '/'});
+            cookies.set('name_premium', data.name, {path: '/'});
+            cookies.set('isAdmin_premium', data.isAdmin, {path: '/'});
+            cookies.set('token_premium', data.token, {path: '/'});
+            cookies.set('user_id_premium', data.user_id, {path: '/'});
             
             if (data.isAdmin){
              window.location.href = "/admin"
