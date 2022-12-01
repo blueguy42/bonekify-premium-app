@@ -45,7 +45,7 @@ class Admin extends Component{
     }
 
     getSubs = () => {
-      fetch('http://localhost:1400/subscription/getpending', {
+      fetch('http://localhost:1400/subscription/pending', {
             method: 'GET',
             mode: "cors",       
             headers: {
