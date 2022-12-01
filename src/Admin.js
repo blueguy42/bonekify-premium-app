@@ -35,7 +35,8 @@ class Admin extends Component{
         subs : [],
         page : 1
       }
-      this.handleClick = this.handleClick.bind(this);
+      this.handleAccept = this.handleAccept.bind(this);
+      this.handleReject = this.handleReject.bind(this);
       this.handlePagination = this.handlePagination.bind(this);
       this.getSubs = this.getSubs.bind(this)
     }
@@ -67,12 +68,45 @@ class Admin extends Component{
         })
       }
       
-    handleClick = (indeks) => {
-        this.state.subs.splice(indeks,1)
-        this.setState({
-          subs: this.state.subs
-        });
-    }
+      handleAccept = (creator_id, subscriber_id) => {
+        let dataToSend = JSON.stringify({"creator_id": creator_id, "subscriber_id": subscriber_id });
+        fetch('http://localhost:1400/subscription/setstatus/accept', {
+              method: 'PUT',
+              mode: "cors",
+              body: dataToSend,        
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': cookies.get('token')
+            }
+            
+          }).then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data)
+            this.getSubs()
+          })
+      }
+  
+      handleReject = (creator_id, subscriber_id) => {
+        let dataToSend = JSON.stringify({"creator_id": creator_id, "subscriber_id": subscriber_id });
+        fetch('http://localhost:1400/subscription/setstatus/reject', {
+              method: 'PUT',
+              mode: "cors",
+              body: dataToSend,        
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': cookies.get('token')
+            }
+            
+          }).then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data)
+            this.getSubs()
+          })
+      }
 
     handlePagination = (event,p) => {
       this.setState({
@@ -100,7 +134,7 @@ class Admin extends Component{
                 Subscriptions Requests! 
               </Typography>
                 {
-                  slicedArray.map((item,index) => <Subs handleClick={this.handleClick} nama= {item} key = {index}></Subs>)
+                  slicedArray.map((item,index) => <Subs handleAccept={this.handleAccept} handleReject={this.handleReject} nama= {item} key = {index}></Subs>)
                 }
                 <Pagination onChange = {this.handlePagination} count={Math.ceil(this.state.subs.length/rowsPerPagination)} color="primary" sx = {{marginTop: '50px', marginBottom:'20px'}} />
             </Box>

@@ -32,7 +32,7 @@ export default function Subs(props) {
             <Grid item xs={2}>
             <Button color="error"
                   type="submit"
-                  onClick = {() => props.handleClick(0)}
+                  onClick = {() => props.handleReject(props.nama[1], props.nama[0])}
                   variant="contained"
                 >
                   Reject
@@ -50,7 +50,7 @@ export default function Subs(props) {
             <Grid item xs={2}>
             <Button color="success"
                   type="submit"
-                  onClick = {() => props.handleClick(0)}
+                  onClick = {() => props.handleAccept(props.nama[1], props.nama[0])}
                   variant="contained"
                 >
                   Accept
