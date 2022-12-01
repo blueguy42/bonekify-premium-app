@@ -6,6 +6,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Paper from  '@mui/material/Paper';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 const theme = createTheme({
   palette: {
@@ -30,8 +34,21 @@ class TambahLagu extends Component{
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Dummy submit');
-        };
+        let formData = new FormData(event.target);
+        
+        axios.post('http://localhost:1400/lagu/auth/create', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': cookies.get('token')
+          } 
+        })
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+        }).catch(err => {
+            console.log(err);
+        })
+      };
 
       return (
         <ThemeProvider theme={theme}>
@@ -58,12 +75,14 @@ class TambahLagu extends Component{
                   sx = {{color: 'red'}}
                 />
                 <TextField
+                  type = "file"
+                  inputProps={{ accept: 'audio/wav, audio/mp3'}} 
                   margin="normal"
                   required
                   fullWidth
-                  name="audiopath"
-                  label="audiopath"
-                  id="audiopath"
+                  name="audio_path"
+                  label="audio path"
+                  id="audio_path"
                 />
                 <Button color="success"
                   type="submit"

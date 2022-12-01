@@ -28,7 +28,7 @@ export default function Subs(props) {
 
   return (
     <ThemeProvider theme={theme}>   
-        <Grid container spacing={2} sx = {{borderRadius: 3 , marginTop:'50px', paddingBottom:'15px', textAlign: 'center', alignItems: 'center', background: 'linear-gradient(30deg, rgba(60,99,96,1) 35%, rgba(61,103,72,1) 100%)'}}>
+        <Grid container spacing={2} sx = {{boxShadow: 3, borderRadius: 3 , marginTop:'50px', paddingBottom:'15px', textAlign: 'center', alignItems: 'center', background: 'linear-gradient(30deg, rgba(60,99,96,1) 35%, rgba(61,103,72,1) 100%)'}}>
             <Grid item xs={2}>
             <Button color="error"
                   type="submit"

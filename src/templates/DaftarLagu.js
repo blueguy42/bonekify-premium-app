@@ -4,6 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
+import axios from 'axios';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Lagu from './Lagu';
 import Cookies from "universal-cookie";
@@ -38,6 +39,7 @@ class DaftarLagu extends Component{
       this.handleDelete = this.handleDelete.bind(this);
       this.handlePagination = this.handlePagination.bind(this);
       this.handleEdit = this.handleEdit.bind(this)
+      this.handleEdit2 = this.handleEdit2.bind(this)
       this.getSongs = this.getSongs.bind(this)
     }
 
@@ -108,6 +110,21 @@ class DaftarLagu extends Component{
         })
     }
 
+    handleEdit2 = (formData) => {
+      axios.put('http://localhost:1400/lagu/auth/update/audio_path', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': cookies.get('token')
+        } 
+      })
+      .then(res => {
+          console.log(res);
+          console.log(res.data);
+      }).catch(err => {
+          console.log(err);
+      })
+    }
+
     handlePagination = (event,p) => {
       this.setState({
         page: p
@@ -134,7 +151,7 @@ class DaftarLagu extends Component{
                 See and Edit Songs Here! 
               </Typography>
                 {
-                  slicedArray.map((item,index) => <Lagu handleDelete={this.handleDelete} handleEdit={this.handleEdit} songs= {this.state.songs} nama= {item[1]} indeks = {item[0]} key = {index}></Lagu>)
+                  slicedArray.map((item,index) => <Lagu handleDelete={this.handleDelete} handleEdit={this.handleEdit} handleEdit2={this.handleEdit2} songs= {this.state.songs} nama= {item[1]} indeks = {item[0]} key = {index}></Lagu>)
                 }
                 <Pagination onChange = {this.handlePagination} count={Math.ceil(this.state.songs.length/rowsPerPagination)} color="primary" sx = {{marginTop: '50px', marginBottom:'20px'}} />
             </Box>

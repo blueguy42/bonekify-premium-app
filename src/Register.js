@@ -130,9 +130,11 @@ handleCPass = (event) => {
               });
             } else {
               console.log(data)
-              cookies.set('isAdmin', '0', {path: '/', expires: new Date(Date.now()+3600*24)});
-              cookies.set('token', data.token, {path: '/', expires: new Date(Date.now()+3600*24)});
-              cookies.set('user_id', data.user_id, {path: '/', expires: new Date(Date.now()+3600*24)});
+              cookies.set('isAdmin', '0', {path: '/'});
+              cookies.set('token', data.token, {path: '/'});
+              cookies.set('user_id', data.user_id, {path: '/'});
+              cookies.set('name', data.name, {path: '/'});
+
               
               window.location.href = "/penyanyi"
             }

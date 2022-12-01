@@ -39,6 +39,7 @@ const theme = createTheme({
 
 export default function Lagu(props) {
     const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
 
     const handleSubmit = (event) => {
       event.preventDefault();
@@ -47,9 +48,18 @@ export default function Lagu(props) {
       setOpen(false)
     }
 
+    const handleSubmit2 = (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      data.append('song_id', props.indeks)
+      console.log(data)
+      props.handleEdit2(data)
+      setOpen2(false)
+    }
+
   return (
     <ThemeProvider theme={theme}>   
-        <Grid container spacing={2} sx = {{marginTop:'50px', paddingBottom:'15px', textAlign: 'center', alignItems: 'center', background: 'linear-gradient(30deg, rgba(60,99,96,1) 35%, rgba(61,103,72,1) 100%)', borderRadius: 3 }}>
+        <Grid container spacing={2} sx = {{marginTop:'50px', paddingBottom:'15px', textAlign: 'center', alignItems: 'center', background: 'linear-gradient(30deg, rgba(60,99,96,1) 35%, rgba(61,103,72,1) 100%)', borderRadius: 3 , boxShadow: 3}}>
             <Grid item xs={2}>
             <Button color="error"
                   type="submit"
@@ -73,8 +83,16 @@ export default function Lagu(props) {
                   type="submit"
                   onClick = {() => setOpen(true)}
                   variant="contained"
+                  sx ={{marginBottom: '20px'}}
                 >
                   Edit Name
+            </Button >
+            <Button color="success"
+                  type="submit"
+                  onClick = {() => setOpen2(true)}
+                  variant="contained"
+                >
+                  Edit Audio
             </Button >
             </Grid>
             <Modal
@@ -94,6 +112,38 @@ export default function Lagu(props) {
                   id="newName"
                   label="New Song Name"
                   name="newName"
+                  autoFocus
+                  sx = {{color: 'red'}}
+                />
+                <Button color="success"
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Submit
+                </Button >
+                </Box>
+        </Box>
+      </Modal>
+      <Modal
+        open={open2}
+        onClose={() => setOpen2(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <Typography component="h1" variant="h4" sx={{textAlign: 'center', marginBottom: '20px', fontWeight: '700', textShadow: '1px 1px 1px black', color: 'black'}}>
+                Update song!
+              </Typography>
+              <Box component="form" onSubmit={handleSubmit2} noValidate sx={{ mt: 1 }}>
+                <TextField
+                  type = "file"
+                  inputProps={{ accept: 'audio/wav, audio/mp3'}}
+                  margin="normal"
+                  fullWidth
+                  id="audio_path"
+                  name="audio_path"
                   autoFocus
                   sx = {{color: 'red'}}
                 />

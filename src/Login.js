@@ -76,9 +76,10 @@ class Login extends Component{
             });
           } else {
             console.log(data)
-            cookies.set('isAdmin', data.isAdmin, {path: '/', expires: new Date(Date.now()+3600*24)});
-            cookies.set('token', data.token, {path: '/', expires: new Date(Date.now()+3600*24)});
-            cookies.set('user_id', data.user_id, {path: '/', expires: new Date(Date.now()+3600*24)});
+            cookies.set('name', data.name, {path: '/'});
+            cookies.set('isAdmin', data.isAdmin, {path: '/'});
+            cookies.set('token', data.token, {path: '/'});
+            cookies.set('user_id', data.user_id, {path: '/'});
             
             if (data.isAdmin){
              window.location.href = "/admin"
