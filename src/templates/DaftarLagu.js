@@ -67,9 +67,7 @@ class DaftarLagu extends Component{
           this.setState({
             songs : temp
           });
-        }).catch(err => {
-          console.log(err);
-      })
+        })
       }
 
     handleDelete = (indeks) => {
