@@ -58,7 +58,7 @@ class Admin extends Component{
         })
         .then((data) => {
           let temp = []
-          data.return.forEach((x, i) => {
+          data.forEach((x, i) => {
             temp.push([x.subscriber_id, x.creator_id])
           })
           this.setState({
