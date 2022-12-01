@@ -83,7 +83,6 @@ class Admin extends Component{
             return response.json();
           })
           .then((data) => {
-            console.log(data)
             this.getSubs()
           })
       }
@@ -103,7 +102,6 @@ class Admin extends Component{
             return response.json();
           })
           .then((data) => {
-            console.log(data)
             this.getSubs()
           })
       }

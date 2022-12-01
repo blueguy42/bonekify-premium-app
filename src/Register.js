@@ -129,7 +129,6 @@ handleCPass = (event) => {
                 errorMsg: data.message
               });
             } else {
-              console.log(data)
               cookies.set('isAdmin', '0', {path: '/'});
               cookies.set('token', data.token, {path: '/'});
               cookies.set('user_id', data.user_id, {path: '/'});

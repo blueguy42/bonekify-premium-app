@@ -52,7 +52,6 @@ export default function Lagu(props) {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
       data.append('song_id', props.indeks)
-      console.log(data)
       props.handleEdit2(data)
       setOpen2(false)
     }

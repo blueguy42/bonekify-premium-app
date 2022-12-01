@@ -75,7 +75,6 @@ class Login extends Component{
               errorMsg: data.message
             });
           } else {
-            console.log(data)
             cookies.set('name', data.name, {path: '/'});
             cookies.set('isAdmin', data.isAdmin, {path: '/'});
             cookies.set('token', data.token, {path: '/'});

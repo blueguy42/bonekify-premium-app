@@ -35,7 +35,6 @@ class Penyanyi extends Component{
     }
 
     handleTab = (event,newtab) => {
-      console.log(newtab)
       this.setState({
         tab: newtab
       });

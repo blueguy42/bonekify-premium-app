@@ -85,7 +85,6 @@ class DaftarLagu extends Component{
           return response.json();
         })
         .then((data) => {
-          console.log(data)
           this.getSongs()
         })
     }
@@ -105,7 +104,6 @@ class DaftarLagu extends Component{
           return response.json();
         })
         .then((data) => {
-          console.log(data)
           this.getSongs()
         })
     }
