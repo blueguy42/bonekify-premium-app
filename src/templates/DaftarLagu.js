@@ -45,6 +45,7 @@ class DaftarLagu extends Component{
 
     componentDidMount(){
       this.getSongs()
+      this.addInterval = setInterval( () => this.getSongs(), 15000)
     }
 
     getSongs = () => {

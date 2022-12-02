@@ -43,6 +43,7 @@ class Admin extends Component{
 
     componentDidMount(){
       this.getSubs()
+      this.addInterval = setInterval( () => this.getSubs(), 15000)
     }
 
     getSubs = () => {
