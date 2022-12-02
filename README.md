@@ -34,7 +34,7 @@ However, if you choose to run using NPM then you can run
 ```
 npm install
 ```
-For other dependant libraries, you need can install it by running this to the terminal
+For other dependant libraries, you can install it by running this to the terminal
 ```
 npm install @mui/material @emotion/react @emotion/styled universal-cookie multer axios
 ```
