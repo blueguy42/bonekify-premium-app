@@ -60,11 +60,11 @@ The web application will now be up and running. It is now locally accessible thr
 
 
 ## Screenshots
-![login.png](./public/img/screenshots/Login.png)
-![register.png](./public/img/screenshots/Register.png)
-![tambahlagu.png](./public/img/screenshots/TambahLagu.png)
-![daftarlagu.png](./public/img/screenshots/DaftarLagu.png)
-![admin.png](./public/img/screenshots/Admin.png)
+![login.png](./public/img/Screenshots/Login.png)
+![register.png](./public/img/Screenshots/Register.png)
+![tambahlagu.png](./public/img/Screenshots/TambahLagu.png)
+![daftarlagu.png](./public/img/Screenshots/DaftarLagu.png)
+![admin.png](./public/img/Screenshots/Admin.png)
 
 ## Tasks Allocation
 This project is made by:
