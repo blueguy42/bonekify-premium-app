@@ -9,28 +9,14 @@ Bonekify Premium is built on React. Data is stored on a MySQL server from the ba
 ## Table of Contents
 - [BONEKIFY PREMIUM APP - Tugas Besar 2 IF3110](#bonekify-premium-app---tugas-besar-2-if3110)
   - [Table of Contents](#table-of-contents)
-  - [Requirements](#requirements)
   - [Installation](#installation)
   - [Running the Server](#running-the-server)
   - [Screenshots](#screenshots)
   - [Tasks Allocation](#tasks-allocation)
-## Requirements
-As the server is running on a Docker container, make sure to first install Docker.
-You can choose to install Docker with <a href="https://www.docker.com/products/docker-desktop/">Docker Desktop</a> or a CLI.
-
-However, if you choose to run the server without Docker then you need to install NPM.
-You can download NPM through <a href="https://nodejs.org/en/download/.">this link.</a>.
-This project also requires Material UI, multer, axios, and universal-cookie library.
 
 ## Installation
-If you choose to use Docker, then you can first install then run Docker.
-To run the server, first build the container. Go to the Bonekify-Config Repository run:
-```
-docker compose up --build -d bonekify_premium_service
-```
-The command will build and run the container for the first time.
-
-However, if you choose to run using NPM then you can run 
+If you choose to use Docker, then you can refer to Bonekify Config Repository
+However, if you choose to run using NPM then you can run :
 ```
 npm install
 ```
@@ -43,6 +29,7 @@ npm install @mui/material @emotion/react @emotion/styled universal-cookie multer
 There are 2 ways to run this react app.
 
 1. Docker
+Make sure to refer requirements and installations in the Bonekify Config Repository first.
 
 ```
 docker compose up
@@ -56,8 +43,6 @@ npm start
 ```
 The web application will now be up and running. It is now locally accessible through port 3000.
 <b><a href="http://localhost:1300/public">http://localhost:3000</a></b>
-
-
 
 ## Screenshots
 ![login.png](./public/img/Screenshots/Login.png)
