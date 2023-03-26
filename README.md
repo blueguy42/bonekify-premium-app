@@ -1,4 +1,4 @@
-# BONEKIFY PREMIUM APP - Tugas Besar 2 IF3110
+# BONEKIFY PREMIUM APP - IF3110 Web based Application Development: Major Assignment 2
 
 This is the repository for the front-end side of the Bonekify Premium App.
 
@@ -7,7 +7,6 @@ Bonekify Premium App is the extension of the original Bonekify App where users m
 Bonekify Premium is built on React. Data is stored on a MySQL server from the back-end side.
 
 ## Table of Contents
-- [BONEKIFY PREMIUM APP - Tugas Besar 2 IF3110](#bonekify-premium-app---tugas-besar-2-if3110)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Running the Server](#running-the-server)
@@ -57,7 +56,7 @@ This project is made by:
 - <a href="https://www.linkedin.com/in/saulsayers/?originalSubdomain=id">Saul Sayers (13520094)</a>
 - <a href="https://www.linkedin.com/in/rizky-ramadhana-putra-kusnaryanto-6037a51aa/">Rizky Ramadhana Putra Kusnaryanto (13520151)</a>
 
-Halaman | Contributors 
+Task | Contributors 
 --- | --- 
 Routing | 13520094
 Login | 13520094 
